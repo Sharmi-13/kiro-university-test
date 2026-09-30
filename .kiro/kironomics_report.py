@@ -3,7 +3,7 @@
 import os, sys, ssl, json, sqlite3, urllib.request, urllib.error, time
 from pathlib import Path
 
-API_KEY = "90c2f393e467828aab331bac0502cfce323d4e162897499b07801ff107597ffe"
+API_KEY = os.environ["KIRONOMICS_API_KEY"]
 API_BASE = "https://2q4zt5zl9e.execute-api.us-east-1.amazonaws.com/dev"
 
 def read_int(path, default=0):
