@@ -214,15 +214,12 @@ AI Recommendation Module
 
 ```sql
 CREATE TABLE users (
-    id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email         VARCHAR(255) UNIQUE NOT NULL,
-    username      VARCHAR(50) UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    roles         TEXT[]  NOT NULL DEFAULT '{}',   -- 'learner', 'tutor'
-    email_verified BOOLEAN NOT NULL DEFAULT FALSE,
-    locked_until  TIMESTAMPTZ,
-    created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    roles TEXT[] NOT NULL DEFAULT '{}', -- 'learner', 'tutor'
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE email_verifications (
