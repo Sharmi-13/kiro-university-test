@@ -30,7 +30,9 @@ Incremental implementation of the Link2Skill Next.js + Supabase web application.
 - [ ] 2. Authentication
   - [ ] 2.1 Implement registration API route (`POST /api/auth/register`)
     - Validate email, username (3–50 chars, `[A-Za-z0-9_-]` only), and password (≥8 chars, upper + lower + digit)
-    - Call Supabase Auth `signUp`; insert user row; generate HMAC email verification token; enqueue verification email via Supabase Edge Function or email provider
+    - Call Supabase Auth `signUp` with `options.data: { username, roles }` so metadata is stored on the `auth.users` row; do NOT insert directly into `public.users` from the route
+    - `public.users` is created atomically by the `handle_new_user` AFTER INSERT trigger on `auth.users` (migration `20261001043126_handle_new_user_trigger.sql`), which runs with `SECURITY DEFINER` to bypass RLS — required because email-confirmation mode issues no session at sign-up time
+    - Supabase Auth sends the verification email automatically; no separate HMAC token or edge function needed for this step
     - Return 409 on duplicate email (generic message, no field disclosure)
     - _Requirements: 1.1, 1.2, 1.8, 1.9_
 
