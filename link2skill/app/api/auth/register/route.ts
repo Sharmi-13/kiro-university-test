@@ -9,54 +9,8 @@
 import { z } from "zod";
 
 import { error, success, type FieldError } from "@/lib/api/response";
+import { registerSchema } from "@/lib/auth/validation";
 import { createClient } from "@/lib/supabase/server";
-import { UserRole } from "@/lib/types";
-
-// ---------------------------------------------------------------------------
-// Validation schema
-// ---------------------------------------------------------------------------
-
-/**
- * Password rule: ≥8 characters, at least one uppercase letter,
- * one lowercase letter, and one digit.
- * Requirements: 1.1
- */
-const passwordSchema = z
-  .string()
-  .min(8, "Password must be at least 8 characters")
-  .refine((v) => /[A-Z]/.test(v), {
-    message: "Password must contain at least one uppercase letter",
-  })
-  .refine((v) => /[a-z]/.test(v), {
-    message: "Password must contain at least one lowercase letter",
-  })
-  .refine((v) => /[0-9]/.test(v), {
-    message: "Password must contain at least one digit",
-  });
-
-/**
- * Username rule: 3–50 characters, letters/digits/underscore/hyphen only.
- * Requirements: 1.9
- */
-const usernameSchema = z
-  .string()
-  .min(3, "Username must be at least 3 characters")
-  .max(50, "Username must be at most 50 characters")
-  .regex(
-    /^[A-Za-z0-9_-]+$/,
-    "Username may only contain letters, digits, underscores, and hyphens",
-  );
-
-const registerSchema = z.object({
-  email: z.string().email("A valid email address is required"),
-  username: usernameSchema,
-  password: passwordSchema,
-  // Requirement 1.8: role selection at registration (learner | tutor | both)
-  roles: z
-    .array(z.enum([UserRole.LEARNER, UserRole.TUTOR]))
-    .min(1, "At least one role must be selected")
-    .default([UserRole.LEARNER]),
-});
 
 // ---------------------------------------------------------------------------
 // Helper: map Zod field errors to the API envelope shape
