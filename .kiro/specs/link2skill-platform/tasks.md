@@ -101,7 +101,7 @@ Incremental implementation of the Link2Skill Next.js + Supabase web application.
     - Enforce ≤10 subjects at app layer; return 422 with field list on validation failure
     - _Requirements: 2.1, 2.2, 2.3, 2.6, 2.7, 2.9_
 
-  - [ ]* 4.2 Write property test for tutor profile validation (fast-check)
+  - [x]* 4.2 Write property test for tutor profile validation (fast-check)
     - **Property 8: Tutor profile validation rejects invalid inputs and accepts valid ones**
     - **Property 9: Tutor profile subjects are always bounded at 10**
     - **Validates: Requirements 2.1, 2.3, 2.6, 2.7**
