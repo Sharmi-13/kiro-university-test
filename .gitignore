@@ -48,6 +48,9 @@ backup/
 
 # Kiro temp
 $FILE
+
+# Kironomics secrets (API key — never commit)
+.kiro/kironomics.env
 # Link2Skill generated files
 link2skill/node_modules/
 link2skill/.next/

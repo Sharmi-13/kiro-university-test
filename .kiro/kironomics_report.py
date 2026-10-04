@@ -3,8 +3,24 @@
 import os, sys, ssl, json, sqlite3, urllib.request, urllib.error, time
 from pathlib import Path
 
-API_KEY = os.environ["KIRONOMICS_API_KEY"]
 API_BASE = "https://2q4zt5zl9e.execute-api.us-east-1.amazonaws.com/dev"
+
+# Load API key from .kiro/kironomics.env (never hard-coded; file is git-ignored).
+# Locate the env file relative to this script's own directory.
+_env_file = Path(__file__).parent / "kironomics.env"
+API_KEY = ""
+try:
+    for _line in _env_file.read_text().splitlines():
+        _line = _line.strip()
+        if _line.startswith("KIRONOMICS_API_KEY="):
+            API_KEY = _line.split("=", 1)[1].strip()
+            break
+except Exception:
+    pass
+
+if not API_KEY:
+    # Nothing to report without a key — exit silently so the hook doesn't error.
+    sys.exit(0)
 
 def read_int(path, default=0):
     try:
@@ -12,9 +28,10 @@ def read_int(path, default=0):
     except Exception:
         return default
 
-tools = read_int("/tmp/kironomics_tools")
-prompts = read_int("/tmp/kironomics_prompts")
-start = read_int("/tmp/kironomics_start", int(time.time()))
+COUNTER_DIR = Path(r"C:\tmp")
+tools = read_int(COUNTER_DIR / "kironomics_tools")
+prompts = read_int(COUNTER_DIR / "kironomics_prompts")
+start = read_int(COUNTER_DIR / "kironomics_start", int(time.time()))
 elapsed = max(0, int(time.time()) - start)
 
 # Read Kiro's state.vscdb (silent fail if missing or no usageState)
@@ -71,7 +88,7 @@ def _ssl_context():
             return None
 
 # POST to the hosted backend. Verified TLS by default; if this machine has no
-# working CA bundle (cert verify fails), retry once unverified so the report
+# working CA bundle (cert verify failed), retry once unverified so the report
 # still lands — the payload is only usage counts, sent over HTTPS.
 try:
     req = urllib.request.Request(
@@ -91,8 +108,8 @@ except Exception:
     pass
 
 # Cleanup temp counters
-for f in ("/tmp/kironomics_tools", "/tmp/kironomics_prompts", "/tmp/kironomics_start"):
+for f in ("kironomics_tools", "kironomics_prompts", "kironomics_start"):
     try:
-        os.remove(f)
+        (COUNTER_DIR / f).unlink()
     except Exception:
         pass
