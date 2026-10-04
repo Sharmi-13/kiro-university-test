@@ -1,5 +1,5 @@
 // Feature: link2skill-platform
-// Task 2.10: Authentication proxy (Next.js 16 — replaces middleware.ts)
+// Task 2.10: Authentication proxy (Next.js 16 — file must be named proxy.ts)
 // Requirements: 1.6
 //
 // Protects /dashboard/* routes server-side.
@@ -10,9 +10,15 @@
 // Role resolution reads from public.users (canonical app role store) via
 // the Supabase server client, which uses HttpOnly cookies. No client-
 // supplied role value is trusted.
+//
+// Next.js 16 note: The file must be named proxy.ts (not middleware.ts)
+// and the exported function must be named `proxy`. The `middleware`
+// convention is deprecated in Next.js 16.
 
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
+
+import { env } from "@/lib/env";
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next({
@@ -21,8 +27,8 @@ export async function proxy(request: NextRequest) {
 
   // Build a Supabase client that can read/write cookies in proxy context.
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
