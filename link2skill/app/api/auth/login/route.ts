@@ -2,18 +2,10 @@
 // Task 2.4: POST /api/auth/login
 // Requirements: 1.3, 1.4, 1.5
 
-import { z } from "zod";
-
-import { error, success, type FieldError } from "@/lib/api/response";
+import { error, success } from "@/lib/api/response";
+import { zodFieldErrors } from "@/lib/api/zod";
 import { loginSchema } from "@/lib/auth/login-validation";
 import { createClient } from "@/lib/supabase/server";
-
-function zodFieldErrors(err: z.ZodError): FieldError[] {
-  return err.issues.map((issue) => ({
-    field: issue.path.join(".") || "root",
-    message: issue.message,
-  }));
-}
 
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;

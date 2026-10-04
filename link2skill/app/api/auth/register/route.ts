@@ -6,22 +6,10 @@
 // Property 2: Duplicate email registration is always rejected
 // Property 3: Invalid username constraints produce specific error messages
 
-import { z } from "zod";
-
-import { error, success, type FieldError } from "@/lib/api/response";
+import { error, success } from "@/lib/api/response";
+import { zodFieldErrors } from "@/lib/api/zod";
 import { registerSchema } from "@/lib/auth/validation";
 import { createClient } from "@/lib/supabase/server";
-
-// ---------------------------------------------------------------------------
-// Helper: map Zod field errors to the API envelope shape
-// ---------------------------------------------------------------------------
-
-function zodFieldErrors(err: z.ZodError): FieldError[] {
-  return err.issues.map((issue) => ({
-    field: issue.path.join(".") || "root",
-    message: issue.message,
-  }));
-}
 
 // ---------------------------------------------------------------------------
 // Route handler
