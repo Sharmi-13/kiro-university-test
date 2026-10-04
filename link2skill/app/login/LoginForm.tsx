@@ -113,12 +113,6 @@ function LoginFormInner() {
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">
             Password
           </label>
-          <Link
-            href="/forgot-password"
-            className="text-xs font-medium text-indigo-600 hover:text-indigo-500"
-          >
-            Forgot password?
-          </Link>
         </div>
         <input
           id="password"
