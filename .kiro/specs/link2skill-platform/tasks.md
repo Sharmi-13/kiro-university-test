@@ -93,7 +93,7 @@ Incremental implementation of the Link2Skill Next.js + Supabase web application.
   - Ensure all auth tests pass. Verify registration, login, lockout, token expiry, and password reset flows end-to-end. Ask the user if questions arise.
 
 - [ ] 4. Tutor profile
-  - [ ] 4.1 Implement tutor profile CRUD API routes (`/api/profiles/tutors`)
+  - [x] 4.1 Implement tutor profile CRUD API routes (`/api/profiles/tutors`)
     - `POST /api/profiles/tutors` — validate display name (2–50 chars), at least one subject, language, skill level; insert `tutor_profiles` row
     - `PUT /api/profiles/tutors/:id` — update fields; invalidate `profile:tutor:{tutorId}` Redis cache key
     - `GET /api/profiles/tutors/:id` — return public profile; cache 300 s in Redis
