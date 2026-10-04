@@ -87,7 +87,7 @@ export async function POST(request: Request): Promise<Response> {
       visibility,
     })
     .select(
-      "id, display_name, biography, subjects, languages, skill_levels, visibility, average_rating, follower_count, created_at, updated_at",
+      "id, display_name, biography, photo_url, subjects, languages, skill_levels, visibility, average_rating, follower_count, created_at, updated_at",
     )
     .single();
 
@@ -95,7 +95,7 @@ export async function POST(request: Request): Promise<Response> {
     console.error("[POST /api/profiles/tutors] insert error:", insertError);
     return error(
       "internal_error",
-      "Failed to create tutor profile. Please try again.",
+      `Failed to create tutor profile. DB: ${insertError.code} — ${insertError.message}`,
       500,
     );
   }
