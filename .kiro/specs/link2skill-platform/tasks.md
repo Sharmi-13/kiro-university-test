@@ -80,6 +80,15 @@ Incremental implementation of the Link2Skill Next.js + Supabase web application.
     - Verify JWT on every request to protected API routes; attach `userId` and `roles` to request context
     - _Requirements: 1.6_
 
+  - [x] 2.11 Implement authenticated dashboard shell for learner and tutor roles
+    - Create `app/components/dashboard/DashboardShell.tsx` — sticky authenticated header (logo links to own dashboard, not public `/`), role-switch link, logout button, responsive shell layout
+    - Create `app/components/dashboard/DashboardNavCard.tsx` — reusable navigation card used by both dashboards; renders as a link when a route is implemented or as a "coming soon" placeholder when the feature is pending
+    - Rewrite `app/dashboard/learner/page.tsx` — identity bar (username + role badge + member since), navigation grid for: My Feed, Discover Tutors, Explore Subjects, Following, Saved Content, Preferences, Notifications; all cards marked coming-soon until the backing API tasks are complete; no email address exposed
+    - Rewrite `app/dashboard/tutor/page.tsx` — identity bar (username + role badge + member since), navigation grid for: My Tutor Profile, My Content, Create Content, Community, Engagement Metrics, Preferences, Notifications; all cards marked coming-soon; no email address exposed
+    - Fix: logo/home link inside authenticated dashboards routes to the user's own dashboard (not the public marketing page)
+    - Fix: email address removed from dashboard UI — username is the only identity displayed
+    - _Requirements: 1.3, 1.6, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 10.1, 10.6, 11.1, 12.6_
+
 - [ ] 3. Checkpoint — Auth complete
   - Ensure all auth tests pass. Verify registration, login, lockout, token expiry, and password reset flows end-to-end. Ask the user if questions arise.
 
