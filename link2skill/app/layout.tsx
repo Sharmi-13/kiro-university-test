@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Link2Skill connects learners with tutors across Tamil and English educational content. Discover tutors, follow lessons, and grow at your own pace.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
