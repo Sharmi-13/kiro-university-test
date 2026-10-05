@@ -34,7 +34,7 @@ export default async function AnalyticsPage() {
     supabase
       .from("content_items")
       .select("id, status, view_count, save_count")
-      .eq("tutor_id", user.id)
+      .or(`tutor_id.eq.${user.id},is_demo.eq.true`)
       .in("status", ["Draft", "Scheduled", "Published", "Under_Review", "Approved"]),
     supabase
       .from("comments")

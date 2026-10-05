@@ -85,12 +85,12 @@ export default async function TutorDashboardPage() {
     supabase
       .from("content_items")
       .select("id, status")
-      .eq("tutor_id", user.id)
+      .or(`tutor_id.eq.${user.id},is_demo.eq.true`)
       .in("status", ["Draft", "Scheduled", "Published", "Under_Review", "Approved"]),
     supabase
       .from("content_items")
       .select("id, title, type, status, created_at")
-      .eq("tutor_id", user.id)
+      .or(`tutor_id.eq.${user.id},is_demo.eq.true`)
       .in("status", ["Draft", "Scheduled", "Published", "Under_Review", "Approved"])
       .order("created_at", { ascending: false })
       .limit(5),

@@ -36,7 +36,7 @@ export default async function MyContentPage() {
     .select(
       "id, type, title, subject_tag, language_tag, skill_level, status, view_count, save_count, published_at, created_at, updated_at",
     )
-    .eq("tutor_id", user.id)
+    .or(`tutor_id.eq.${user.id},is_demo.eq.true`)
     .in("status", ["Draft", "Scheduled", "Published", "Under_Review", "Approved"])
     .order("created_at", { ascending: false });
 

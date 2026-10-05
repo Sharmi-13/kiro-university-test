@@ -48,7 +48,7 @@ export async function GET(): Promise<Response> {
     .select(
       "id, type, title, subject_tag, language_tag, skill_level, status, published_at, view_count, save_count, created_at, updated_at",
     )
-    .eq("tutor_id", user.id)
+    .or(`tutor_id.eq.${user.id},is_demo.eq.true`)
     .in("status", ["Draft", "Scheduled", "Published", "Under_Review", "Approved"])
     .order("created_at", { ascending: false });
 

@@ -75,69 +75,69 @@ BEGIN
   -- ── Step 3: Published posts (12) ─────────────────────────────────────
   INSERT INTO public.content_items
     (tutor_id, type, title, body, subject_tag, language_tag, skill_level,
-     status, published_at, view_count, save_count, created_at, updated_at)
+     status, published_at, view_count, save_count, is_demo, created_at, updated_at)
   SELECT * FROM (VALUES
     (tutor_id::UUID, 'Post'::content_type, 'Introduction to Algebra',
      'Master the fundamentals of algebra with step-by-step examples.',
      'Mathematics', 'English', 'Beginner', 'Published'::content_status,
-     NOW()-INTERVAL '28 days', 312, 48, NOW()-INTERVAL '28 days', NOW()),
+     NOW()-INTERVAL '28 days', 312, 48, true, NOW()-INTERVAL '28 days', NOW()),
 
     (tutor_id, 'Post', 'கணிதம் — அடிப்படைகள்',
      'இந்த பாடம் கணிதத்தின் அடிப்படை கருத்துக்களை விளக்குகிறது.',
      'Mathematics', 'Tamil', 'Beginner', 'Published',
-     NOW()-INTERVAL '26 days', 287, 41, NOW()-INTERVAL '26 days', NOW()),
+     NOW()-INTERVAL '26 days', 287, 41, true, NOW()-INTERVAL '26 days', NOW()),
 
     (tutor_id, 'Post', 'Understanding Quadratic Equations',
      'Solve quadratic equations using factoring, completing the square, and the quadratic formula.',
      'Mathematics', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '24 days', 198, 32, NOW()-INTERVAL '24 days', NOW()),
+     NOW()-INTERVAL '24 days', 198, 32, true, NOW()-INTERVAL '24 days', NOW()),
 
     (tutor_id, 'Post', 'English Grammar: The Basics',
      'A comprehensive guide to English grammar rules for beginners.',
      'English', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '22 days', 445, 67, NOW()-INTERVAL '22 days', NOW()),
+     NOW()-INTERVAL '22 days', 445, 67, true, NOW()-INTERVAL '22 days', NOW()),
 
     (tutor_id, 'Post', 'Introduction to Python Programming',
      'Your first steps in Python — variables, loops, and functions.',
      'Python', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '16 days', 389, 56, NOW()-INTERVAL '16 days', NOW()),
+     NOW()-INTERVAL '16 days', 389, 56, true, NOW()-INTERVAL '16 days', NOW()),
 
     (tutor_id, 'Post', 'Newton''s Laws of Motion Explained',
      'A clear, visual explanation of Newton''s three laws with real-world examples.',
      'Science', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '18 days', 267, 38, NOW()-INTERVAL '18 days', NOW()),
+     NOW()-INTERVAL '18 days', 267, 38, true, NOW()-INTERVAL '18 days', NOW()),
 
     (tutor_id, 'Post', 'C Programming — Pointers Explained',
      'Demystifying pointers in C with diagrams and practical examples.',
      'C Programming', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '14 days', 234, 29, NOW()-INTERVAL '14 days', NOW()),
+     NOW()-INTERVAL '14 days', 234, 29, true, NOW()-INTERVAL '14 days', NOW()),
 
     (tutor_id, 'Post', 'Networking Basics — OSI Model',
      'Understanding the 7-layer OSI model with real-world analogies.',
      'Networking', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '12 days', 178, 24, NOW()-INTERVAL '12 days', NOW()),
+     NOW()-INTERVAL '12 days', 178, 24, true, NOW()-INTERVAL '12 days', NOW()),
 
     (tutor_id, 'Post', 'The Periodic Table Explained',
      'Understanding elements, groups, and periods in the periodic table.',
      'Science', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '10 days', 156, 19, NOW()-INTERVAL '10 days', NOW()),
+     NOW()-INTERVAL '10 days', 156, 19, true, NOW()-INTERVAL '10 days', NOW()),
 
     (tutor_id, 'Post', 'English Speaking: Confidence Tips',
      'Practical exercises to speak English with confidence in daily situations.',
      'English', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '6 days', 143, 21, NOW()-INTERVAL '6 days', NOW()),
+     NOW()-INTERVAL '6 days', 143, 21, true, NOW()-INTERVAL '6 days', NOW()),
 
     (tutor_id, 'Post', 'TCP/IP vs OSI — Key Differences',
      'A side-by-side comparison of the TCP/IP and OSI networking models.',
      'Networking', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '4 days', 112, 17, NOW()-INTERVAL '4 days', NOW()),
+     NOW()-INTERVAL '4 days', 112, 17, true, NOW()-INTERVAL '4 days', NOW()),
 
     (tutor_id, 'Post', 'Python Lists vs Tuples — When to Use Which',
      'A practical guide to choosing between lists and tuples in Python.',
      'Python', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '2 days', 98, 14, NOW()-INTERVAL '2 days', NOW())
+     NOW()-INTERVAL '2 days', 98, 14, true, NOW()-INTERVAL '2 days', NOW())
   ) AS v(tutor_id, type, title, body, subject_tag, language_tag, skill_level,
-          status, published_at, view_count, save_count, created_at, updated_at)
+          status, published_at, view_count, save_count, is_demo, created_at, updated_at)
   WHERE NOT EXISTS (
     SELECT 1 FROM public.content_items ci
     WHERE ci.tutor_id = v.tutor_id AND ci.title = v.title
@@ -146,81 +146,81 @@ BEGIN
   -- ── Step 4: Published video lessons (12) ─────────────────────────────
   INSERT INTO public.content_items
     (tutor_id, type, title, body, video_url, subject_tag, language_tag,
-     skill_level, status, published_at, view_count, save_count, created_at, updated_at)
+     skill_level, status, published_at, view_count, save_count, is_demo, created_at, updated_at)
   SELECT * FROM (VALUES
     (tutor_id::UUID, 'Video_Lesson'::content_type, 'Algebra Basics — Full Course',
      'Complete beginner algebra course with practice problems.',
      'https://www.youtube.com/watch?v=NybHckSEQBI',
      'Mathematics', 'English', 'Beginner', 'Published'::content_status,
-     NOW()-INTERVAL '27 days', 521, 78, NOW()-INTERVAL '27 days', NOW()),
+     NOW()-INTERVAL '27 days', 521, 78, true, NOW()-INTERVAL '27 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Python Crash Course',
      'Build your first Python programme in 30 minutes.',
      'https://www.youtube.com/watch?v=rfscVS0vtbw',
      'Python', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '23 days', 612, 94, NOW()-INTERVAL '23 days', NOW()),
+     NOW()-INTERVAL '23 days', 612, 94, true, NOW()-INTERVAL '23 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'C Programming for Beginners',
      'Complete introduction to C programming — variables, loops, functions.',
      'https://www.youtube.com/watch?v=KJgsSFOSQv0',
      'C Programming', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '21 days', 287, 39, NOW()-INTERVAL '21 days', NOW()),
+     NOW()-INTERVAL '21 days', 287, 39, true, NOW()-INTERVAL '21 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'English Speaking — Pronunciation Guide',
      'Perfect your English pronunciation with guided exercises.',
      'https://www.youtube.com/watch?v=dEev-Yp9zj0',
      'English', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '19 days', 498, 72, NOW()-INTERVAL '19 days', NOW()),
+     NOW()-INTERVAL '19 days', 498, 72, true, NOW()-INTERVAL '19 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Networking Fundamentals Full Course',
      'Everything you need to know about computer networking.',
      'https://www.youtube.com/watch?v=qiQR5rTSshw',
      'Networking', 'English', 'Beginner', 'Published',
-     NOW()-INTERVAL '17 days', 201, 28, NOW()-INTERVAL '17 days', NOW()),
+     NOW()-INTERVAL '17 days', 201, 28, true, NOW()-INTERVAL '17 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Data Structures — Arrays and Lists',
      'Visual introduction to arrays, linked lists, and stacks.',
      'https://www.youtube.com/watch?v=RBSGKlAvoiM',
      'Python', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '15 days', 356, 54, NOW()-INTERVAL '15 days', NOW()),
+     NOW()-INTERVAL '15 days', 356, 54, true, NOW()-INTERVAL '15 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Quadratic Equations — All Methods',
      'Every method for solving quadratic equations in one video.',
      'https://www.youtube.com/watch?v=zc2CpyRtjvY',
      'Mathematics', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '13 days', 244, 36, NOW()-INTERVAL '13 days', NOW()),
+     NOW()-INTERVAL '13 days', 244, 36, true, NOW()-INTERVAL '13 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'C Pointers — Visual Masterclass',
      'Pointers explained with memory diagrams and live coding.',
      'https://www.youtube.com/watch?v=zuegQmMdy8M',
      'C Programming', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '11 days', 189, 23, NOW()-INTERVAL '11 days', NOW()),
+     NOW()-INTERVAL '11 days', 189, 23, true, NOW()-INTERVAL '11 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'கணக்கு — வீடியோ பாடம் 1',
      'கணிதத்தில் முதல் அடிகள் — தமிழில்.',
      'https://www.youtube.com/watch?v=NybHckSEQBI',
      'Mathematics', 'Tamil', 'Beginner', 'Published',
-     NOW()-INTERVAL '9 days', 334, 51, NOW()-INTERVAL '9 days', NOW()),
+     NOW()-INTERVAL '9 days', 334, 51, true, NOW()-INTERVAL '9 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Subnetting — CIDR Made Simple',
      'Master IP subnetting and CIDR notation step by step.',
      'https://www.youtube.com/watch?v=BWZ-MHIhqjM',
      'Networking', 'English', 'Advanced', 'Published',
-     NOW()-INTERVAL '7 days', 167, 25, NOW()-INTERVAL '7 days', NOW()),
+     NOW()-INTERVAL '7 days', 167, 25, true, NOW()-INTERVAL '7 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'Advanced Python — Decorators and Generators',
      'Master Python decorators and generators with practical examples.',
      'https://www.youtube.com/watch?v=MYAEv3JoenI',
      'Python', 'English', 'Advanced', 'Published',
-     NOW()-INTERVAL '4 days', 278, 43, NOW()-INTERVAL '4 days', NOW()),
+     NOW()-INTERVAL '4 days', 278, 43, true, NOW()-INTERVAL '4 days', NOW()),
 
     (tutor_id, 'Video_Lesson', 'English Grammar — Tenses Complete Guide',
      'All 12 English tenses explained clearly with examples.',
      'https://www.youtube.com/watch?v=i5iGB7n0V58',
      'English', 'English', 'Intermediate', 'Published',
-     NOW()-INTERVAL '1 day', 134, 18, NOW()-INTERVAL '1 day', NOW())
+     NOW()-INTERVAL '1 day', 134, 18, true, NOW()-INTERVAL '1 day', NOW())
   ) AS v(tutor_id, type, title, body, video_url, subject_tag, language_tag,
-          skill_level, status, published_at, view_count, save_count, created_at, updated_at)
+          skill_level, status, published_at, view_count, save_count, is_demo, created_at, updated_at)
   WHERE NOT EXISTS (
     SELECT 1 FROM public.content_items ci
     WHERE ci.tutor_id = v.tutor_id AND ci.title = v.title
@@ -229,27 +229,27 @@ BEGIN
   -- ── Step 5: Draft content (3) ─────────────────────────────────────────
   INSERT INTO public.content_items
     (tutor_id, type, title, body, subject_tag, language_tag, skill_level,
-     status, created_at, updated_at)
+     status, is_demo, created_at, updated_at)
   SELECT * FROM (VALUES
     (tutor_id::UUID, 'Post'::content_type,
      'Python Generators — Draft',
      'Working draft on Python generators and the yield keyword.',
-     'Python', 'English', 'Advanced', 'Draft'::content_status,
+     'Python', 'English', 'Advanced', 'Draft'::content_status, true,
      NOW()-INTERVAL '1 day', NOW()),
 
     (tutor_id, 'Post',
      'Networking — VLANs Explained — Draft',
      'Draft notes on Virtual LANs and their use in enterprise networking.',
-     'Networking', 'English', 'Intermediate', 'Draft',
+     'Networking', 'English', 'Intermediate', 'Draft', true,
      NOW()-INTERVAL '3 hours', NOW()),
 
     (tutor_id, 'Video_Lesson',
      'C Programming — Memory Management — Draft',
      'Planned video on malloc, free, and memory leaks in C.',
-     'C Programming', 'English', 'Advanced', 'Draft',
+     'C Programming', 'English', 'Advanced', 'Draft', true,
      NOW()-INTERVAL '30 minutes', NOW())
   ) AS v(tutor_id, type, title, body, subject_tag, language_tag, skill_level,
-          status, created_at, updated_at)
+          status, is_demo, created_at, updated_at)
   WHERE NOT EXISTS (
     SELECT 1 FROM public.content_items ci
     WHERE ci.tutor_id = v.tutor_id AND ci.title = v.title
