@@ -5,6 +5,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/app/components/LogoutButton";
 
@@ -144,14 +145,15 @@ function SidebarContent({
   return (
     <div className="flex h-full flex-col">
       {/* Logo */}
-      <div className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-200 px-4">
-        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className="h-7 w-7">
-          <rect width="36" height="36" rx="8" fill="#4F46E5" />
-          <path d="M10 18a8 8 0 0 1 16 0" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <circle cx="18" cy="18" r="3" fill="white" />
-          <path d="M18 21v5M14 26h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-        <span className="font-bold text-gray-900">Link2Skill</span>
+      <div className="flex h-16 shrink-0 items-center border-b border-gray-200 px-4">
+        <Image
+          src="/logo.png"
+          alt="Link2Skill"
+          width={48}
+          height={48}
+          className="h-12 w-12 object-contain"
+          priority
+        />
         <span className="ml-1 rounded-full bg-purple-100 px-2 py-0.5 text-xs font-semibold text-purple-700">
           Tutor
         </span>
