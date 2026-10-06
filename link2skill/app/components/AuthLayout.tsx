@@ -2,6 +2,7 @@
 // Server component.
 
 import Link from "next/link";
+import Image from "next/image";
 
 interface AuthLayoutProps {
   title: string;
@@ -18,13 +19,14 @@ export default function AuthLayout({ title, subtitle, children }: AuthLayoutProp
         className="mb-8 flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         aria-label="Link2Skill home"
       >
-        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className="h-9 w-9">
-          <rect width="36" height="36" rx="8" fill="#4F46E5" />
-          <path d="M10 18a8 8 0 0 1 16 0" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-          <circle cx="18" cy="18" r="3" fill="white" />
-          <path d="M18 21v5M14 26h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-        <span className="text-xl font-bold tracking-tight text-gray-900">Link2Skill</span>
+        <Image
+          src="/logo.png"
+          alt="Link2Skill"
+          width={64}
+          height={64}
+          className="h-16 w-16 object-contain"
+          priority
+        />
       </Link>
 
       <div className="w-full max-w-md rounded-2xl bg-white px-8 py-10 shadow-sm ring-1 ring-gray-200">
