@@ -3,6 +3,7 @@
 // Server component
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -11,14 +12,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand column */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2" aria-label="Link2Skill home">
-              <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className="h-7 w-7">
-                <rect width="36" height="36" rx="8" fill="#4F46E5" />
-                <path d="M10 18a8 8 0 0 1 16 0" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-                <circle cx="18" cy="18" r="3" fill="white" />
-                <path d="M18 21v5M14 26h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              <span className="font-bold text-gray-900">Link2Skill</span>
+            <Link href="/" className="flex items-center" aria-label="Link2Skill home">
+              <Image
+                src="/logo.png"
+                alt="Link2Skill"
+                width={120}
+                height={120}
+                className="h-20 w-20 object-contain"
+              />
             </Link>
             <p className="mt-3 text-sm leading-6 text-gray-600">
               Connecting Tamil and English learners with expert tutors — wherever you are.
