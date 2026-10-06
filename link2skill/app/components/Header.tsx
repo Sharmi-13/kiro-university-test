@@ -3,6 +3,7 @@
 // Server component — no interactivity required at this stage
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -14,31 +15,14 @@ export default function Header() {
           className="flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           aria-label="Link2Skill home"
         >
-          {/* Simple SVG icon — no external image dependency */}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 36 36"
-            fill="none"
-            className="h-8 w-8"
-          >
-            <rect width="36" height="36" rx="8" fill="#4F46E5" />
-            <path
-              d="M10 18a8 8 0 0 1 16 0"
-              stroke="white"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <circle cx="18" cy="18" r="3" fill="white" />
-            <path
-              d="M18 21v5M14 26h8"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="text-lg font-bold tracking-tight text-gray-900">
-            Link2Skill
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Link2Skill"
+            width={40}
+            height={40}
+            className="h-10 w-10 object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
